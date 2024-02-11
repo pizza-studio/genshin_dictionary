@@ -1,2 +1,0 @@
-2024-02-11T05:26:54.071013Z ERROR tracing_unwrap: called `Result::unwrap_or_log()` on an `Err` value: Sqlx(PoolTimedOut)
-2024-02-11T05:28:55.215322Z ERROR tracing_unwrap: called `Result::unwrap_or_log()` on an `Err` value: Sqlx(PoolTimedOut)

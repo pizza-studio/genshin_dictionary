@@ -1,6 +1,7 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::Arc};
 
 use futures::future::try_join_all;
+use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use lazy_static::lazy_static;
 
@@ -52,21 +53,36 @@ pub async fn insert_items(
     db: &PgPool,
 ) -> Result<usize, sqlx::Error> {
     let len = map.len();
+    let bar = Arc::new(ProgressBar::new(len as u64));
     let queries = map.into_iter().map(|(voc_id, voc_trans)| {
-        sqlx::query!(
-            r#"
-            INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
-            VALUES ($1, $2, $3)
-            "#,
-            voc_id,
-            lang as Language,
-            voc_trans
+        let style = ProgressStyle::with_template(
+            "[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7}\n{msg}",
         )
-        .execute(db)
+        .unwrap()
+        .progress_chars("##-");
+        let bar = bar.clone();
+        bar.set_style(style);
+        async move {
+            bar.set_message(format!("{} {}: {}", lang, voc_id, voc_trans.chars().take(50).collect::<String>()));
+            let result = sqlx::query!(
+                r#"
+                INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
+                VALUES ($1, $2, $3)
+                "#,
+                voc_id,
+                lang as Language,
+                voc_trans
+            )
+            .execute(db)
+            .await;
+            bar.inc(1);
+            result
+        }
     });
     for chunk in queries.chunks(50).into_iter() {
         try_join_all(chunk).await?;
     }
+    bar.finish();
     Ok(len)
 }
 

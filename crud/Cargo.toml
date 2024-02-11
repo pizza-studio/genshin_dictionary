@@ -29,4 +29,6 @@ futures = { workspace = true }
 
 dotenvy = { workspace = true }
 
-itertools ={ workspace = true }
+itertools = { workspace = true }
+
+indicatif = "0.17"
