@@ -40,7 +40,7 @@ async fn main() {
 
     let app = app(db);
 
-    let addr = "0.0.0.0:3001";
+    let addr = "0.0.0.0:3002";
     let listener = TcpListener::bind(addr).await.unwrap();
     info!("Listening on {}", addr);
 

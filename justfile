@@ -1,4 +1,4 @@
-dockerbuild:
+dockerbuild: sqlxprepare test
     docker build -t daicanglong/genshin-dictionary-backend:latest . --platform linux/x86_64
 
 dockerpush:
@@ -14,3 +14,6 @@ format:
 
 lint:
     cargo clippy --workspace
+
+sqlxprepare:
+    cargo sqlx prepare --workspace
