@@ -9,5 +9,8 @@ dockerbuildandpush: dockerbuild dockerpush
 test:
     cargo test --workspace
 
-fix:
+format:
     cargo clippy --fix --allow-dirty
+
+lint:
+    cargo clippy --workspace
