@@ -37,13 +37,43 @@ pub async fn query_dictionary(
         "#,
         word,
         page_size as i64,
-        (page.unwrap_or(1) - 1) as i64
+        (page_size as i64) * ((page.unwrap_or(1) - 1) as i64)
     )
     .fetch_all(db)
     .await?;
-    let total_page = (results.first().map(|result| result.total).unwrap_or(1) as f64
-        / page_size as f64)
-        .ceil() as u64;
+    let total = if let Some(total) = results.first().map(|r| r.total) {
+        total
+    } else if ((page.unwrap_or(1) - 1) as i64) == 0 {
+        0
+    } else {
+        sqlx::query!(
+            r#"
+            SELECT
+                COUNT(*) OVER () AS "total!"
+            FROM (
+                    SELECT
+                    DISTINCT ON ("vocabulary_id")
+                        "vocabulary_id",
+                        "language",
+                        "vocabulary_translation",
+                        COUNT(*) OVER () AS "total",
+                        pgroonga_score(tableoid, ctid) AS "score"
+                    FROM "dictionary_items"
+                    WHERE
+                        "vocabulary_translation" &@~ $1
+                    ORDER BY "vocabulary_id"
+                ) AS t
+            ORDER BY LENGTH("vocabulary_translation"), score DESC
+            LIMIT 1
+            "#,
+            word
+        )
+        .fetch_optional(db)
+        .await?
+        .map(|r| r.total)
+        .unwrap_or(0)
+    };
+    let total_page = (total as f64 / page_size as f64).ceil() as u64;
     let queries = results.into_iter().map(|result| {
         let db = db.clone();
         async move {
