@@ -13,10 +13,25 @@ pub async fn query_dictionary(
 ) -> Result<QueryResult, CrudError> {
     let results = sqlx::query!(
         r#"
-        SELECT DISTINCT ON ("vocabulary_id") "vocabulary_id", "language" as "language!: Language", "vocabulary_translation", COUNT(*) OVER () AS "total!"
-        FROM "dictionary_items"
-        WHERE "vocabulary_translation" &@* $1
-        ORDER BY "vocabulary_id", LENGTH("vocabulary_translation")
+        SELECT
+            "vocabulary_id",
+            "language" as "language!: Language",
+            "vocabulary_translation",
+            COUNT(*) OVER () AS "total!"
+        FROM (
+                SELECT
+                DISTINCT ON ("vocabulary_id")
+                    "vocabulary_id",
+                    "language",
+                    "vocabulary_translation",
+                    COUNT(*) OVER () AS "total",
+                    pgroonga_score(tableoid, ctid) AS "score"
+                FROM "dictionary_items"
+                WHERE
+                    "vocabulary_translation" &@~ $1
+                ORDER BY "vocabulary_id"
+            ) AS t
+        ORDER BY LENGTH("vocabulary_translation"), score DESC
         LIMIT $2
         OFFSET $3
         "#,

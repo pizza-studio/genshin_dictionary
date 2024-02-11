@@ -435,6 +435,7 @@ dependencies = [
  "indicatif",
  "itertools",
  "lazy_static",
+ "log",
  "model",
  "reqwest",
  "serde",

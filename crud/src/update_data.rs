@@ -90,28 +90,22 @@ async fn delete_duplicated_items(db: &PgPool) -> Result<(), sqlx::Error> {
     sqlx::query!(
         r#"
         DELETE FROM dictionary_items
-                WHERE
-                    vocabulary_id NOT IN (
-                        SELECT MIN(vocabulary_id)
+        WHERE
+            vocabulary_id NOT IN (
+                SELECT MIN(vocabulary_id)
+                FROM (
+                        SELECT vocabulary_id, STRING_AGG(vocabulary_translation, ', ' ORDER BY language) AS translations
                         FROM (
-                            SELECT
-                                vocabulary_id,
-                                STRING_AGG(vocabulary_translation, ', ') AS translations
-                            FROM (
                                 SELECT
-                                    vocabulary_id,
-                                    vocabulary_translation,
-                                    language
-                                FROM
-                                    dictionary_items
-                                ORDER BY
-                                    language
+                                    vocabulary_id, vocabulary_translation, language
+                                FROM dictionary_items
                             ) AS sorted_items
-                            GROUP BY
-                                vocabulary_id
-                        ) AS subquery_alias
-                        GROUP BY translations
-                    );
+                        GROUP BY
+                            vocabulary_id
+                    ) AS subquery_alias
+                GROUP BY
+                    translations
+            )
         "#
     )
     .execute(db)

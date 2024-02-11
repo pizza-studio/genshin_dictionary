@@ -32,3 +32,5 @@ dotenvy = { workspace = true }
 itertools = { workspace = true }
 
 indicatif = "0.17"
+
+log = { workspace = true }

@@ -28,12 +28,13 @@ async fn main() {
 
     info!("Establishing database connection");
 
-    let db = establish_conn().await.unwrap_or_log();
-
     if args.update {
+        let db = establish_conn(false).await.unwrap_or_log();
         info!("Updating dictionary data");
         update_dictionary(&db).await.unwrap_or_log();
     }
+
+    let db = establish_conn(true).await.unwrap_or_log();
 
     info!("Starting server...");
 
