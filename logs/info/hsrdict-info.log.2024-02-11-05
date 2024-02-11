@@ -1,0 +1,291 @@
+  2024-02-11T05:26:12.135378Z  INFO genshin_dictionary: Args: Args { update: true }
+    at src/main.rs:27
+
+  2024-02-11T05:26:12.135402Z  INFO genshin_dictionary: Establishing database connection
+    at src/main.rs:29
+
+  2024-02-11T05:26:12.160848Z  INFO sqlx::postgres::notice: relation "_sqlx_migrations" already exists, skipping
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/sqlx-postgres-0.7.3/src/connection/stream.rs:163
+
+  2024-02-11T05:26:12.167688Z  INFO genshin_dictionary: Updating dictionary data
+    at src/main.rs:34
+
+  2024-02-11T05:26:12.200636Z  INFO crud::update_data: Data url for cht is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200723Z  INFO crud::update_data: Data url for chs is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHS.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200737Z  INFO crud::update_data: Data url for de is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapDE.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200747Z  INFO crud::update_data: Data url for en is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapEN.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200756Z  INFO crud::update_data: Data url for es is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapES.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200765Z  INFO crud::update_data: Data url for fr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapFR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200800Z  INFO crud::update_data: Data url for id is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapID.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200815Z  INFO crud::update_data: Data url for jp is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapJP.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200824Z  INFO crud::update_data: Data url for kr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapKR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200832Z  INFO crud::update_data: Data url for pt is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapPT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200841Z  INFO crud::update_data: Data url for ru is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapRU.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200877Z  INFO crud::update_data: Data url for th is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapTH.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200890Z  INFO crud::update_data: Data url for vi is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapVI.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:26:12.200903Z  INFO crud::update_data: Getting data for en
+    at crud/src/update_data.rs:33
+
+  2024-02-11T05:26:22.090333Z  INFO crud::update_data: Updating data for en
+    at crud/src/update_data.rs:40
+
+  2024-02-11T05:26:54.071039Z ERROR tracing_unwrap: called `Result::unwrap_or_log()` on an `Err` value: Sqlx(PoolTimedOut)
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/tracing-unwrap-0.10.0/src/lib.rs:316
+
+  2024-02-11T05:28:11.487051Z  INFO genshin_dictionary: Args: Args { update: false }
+    at src/main.rs:27
+
+  2024-02-11T05:28:11.487069Z  INFO genshin_dictionary: Establishing database connection
+    at src/main.rs:29
+
+  2024-02-11T05:28:11.517873Z  INFO sqlx::postgres::notice: relation "_sqlx_migrations" already exists, skipping
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/sqlx-postgres-0.7.3/src/connection/stream.rs:163
+
+  2024-02-11T05:28:11.522585Z  INFO genshin_dictionary: Starting server...
+    at src/main.rs:38
+
+  2024-02-11T05:28:11.523229Z  INFO genshin_dictionary: Listening on 0.0.0.0:3001
+    at src/main.rs:44
+
+  2024-02-11T05:28:18.251988Z  INFO genshin_dictionary: Args: Args { update: true }
+    at src/main.rs:27
+
+  2024-02-11T05:28:18.252012Z  INFO genshin_dictionary: Establishing database connection
+    at src/main.rs:29
+
+  2024-02-11T05:28:18.278073Z  INFO sqlx::postgres::notice: relation "_sqlx_migrations" already exists, skipping
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/sqlx-postgres-0.7.3/src/connection/stream.rs:163
+
+  2024-02-11T05:28:18.286695Z  INFO genshin_dictionary: Updating dictionary data
+    at src/main.rs:34
+
+  2024-02-11T05:28:18.329082Z  INFO crud::update_data: Data url for cht is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329191Z  INFO crud::update_data: Data url for chs is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHS.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329205Z  INFO crud::update_data: Data url for de is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapDE.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329217Z  INFO crud::update_data: Data url for en is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapEN.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329229Z  INFO crud::update_data: Data url for es is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapES.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329240Z  INFO crud::update_data: Data url for fr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapFR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329307Z  INFO crud::update_data: Data url for id is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapID.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329332Z  INFO crud::update_data: Data url for jp is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapJP.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329352Z  INFO crud::update_data: Data url for kr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapKR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329365Z  INFO crud::update_data: Data url for pt is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapPT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329375Z  INFO crud::update_data: Data url for ru is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapRU.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329385Z  INFO crud::update_data: Data url for th is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapTH.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329398Z  INFO crud::update_data: Data url for vi is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapVI.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:28:18.329416Z  INFO crud::update_data: Getting data for kr
+    at crud/src/update_data.rs:33
+
+  2024-02-11T05:28:23.149898Z  INFO crud::update_data: Updating data for kr
+    at crud/src/update_data.rs:40
+
+  2024-02-11T05:28:55.215348Z ERROR tracing_unwrap: called `Result::unwrap_or_log()` on an `Err` value: Sqlx(PoolTimedOut)
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/tracing-unwrap-0.10.0/src/lib.rs:316
+
+  2024-02-11T05:31:25.159402Z  INFO genshin_dictionary: Args: Args { update: true }
+    at src/main.rs:27
+
+  2024-02-11T05:31:25.159426Z  INFO genshin_dictionary: Establishing database connection
+    at src/main.rs:29
+
+  2024-02-11T05:31:25.186038Z  INFO sqlx::postgres::notice: relation "_sqlx_migrations" already exists, skipping
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/sqlx-postgres-0.7.3/src/connection/stream.rs:163
+
+  2024-02-11T05:31:25.195697Z  INFO genshin_dictionary: Updating dictionary data
+    at src/main.rs:34
+
+  2024-02-11T05:31:25.232864Z  INFO crud::update_data: Data url for cht is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.232954Z  INFO crud::update_data: Data url for chs is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHS.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.232965Z  INFO crud::update_data: Data url for de is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapDE.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.232974Z  INFO crud::update_data: Data url for en is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapEN.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.232984Z  INFO crud::update_data: Data url for es is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapES.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.232992Z  INFO crud::update_data: Data url for fr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapFR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233058Z  INFO crud::update_data: Data url for id is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapID.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233088Z  INFO crud::update_data: Data url for jp is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapJP.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233101Z  INFO crud::update_data: Data url for kr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapKR.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233111Z  INFO crud::update_data: Data url for pt is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapPT.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233121Z  INFO crud::update_data: Data url for ru is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapRU.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233131Z  INFO crud::update_data: Data url for th is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapTH.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233141Z  INFO crud::update_data: Data url for vi is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapVI.json
+    at crud/src/update_data.rs:23
+
+  2024-02-11T05:31:25.233180Z  INFO crud::update_data: Getting data for jp
+    at crud/src/update_data.rs:33
+
+  2024-02-11T05:35:17.541047Z  INFO genshin_dictionary: Args: Args { update: true }
+    at src/main.rs:27
+
+  2024-02-11T05:35:17.541070Z  INFO genshin_dictionary: Establishing database connection
+    at src/main.rs:29
+
+  2024-02-11T05:35:17.568973Z  INFO sqlx::postgres::notice: relation "_sqlx_migrations" already exists, skipping
+    at /Users/canglong/.cargo/registry/src/mirrors.tuna.tsinghua.edu.cn-df7c3c540f42cdbd/sqlx-postgres-0.7.3/src/connection/stream.rs:163
+
+  2024-02-11T05:35:17.576077Z  INFO genshin_dictionary: Updating dictionary data
+    at src/main.rs:34
+
+  2024-02-11T05:35:17.606187Z  INFO crud::update_data: Data url for cht is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHT.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606271Z  INFO crud::update_data: Data url for chs is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapCHS.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606285Z  INFO crud::update_data: Data url for de is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapDE.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606293Z  INFO crud::update_data: Data url for en is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapEN.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606302Z  INFO crud::update_data: Data url for es is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapES.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606390Z  INFO crud::update_data: Data url for fr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapFR.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606406Z  INFO crud::update_data: Data url for id is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapID.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606415Z  INFO crud::update_data: Data url for jp is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapJP.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606423Z  INFO crud::update_data: Data url for kr is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapKR.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606431Z  INFO crud::update_data: Data url for pt is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapPT.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606474Z  INFO crud::update_data: Data url for ru is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapRU.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606498Z  INFO crud::update_data: Data url for th is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapTH.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606509Z  INFO crud::update_data: Data url for vi is: https://github.com/Masterain98/GenshinData/raw/main/TextMap/TextMapVI.json
+    at crud/src/update_data.rs:24
+
+  2024-02-11T05:35:17.606524Z  INFO crud::update_data: Getting data for de
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:35:22.889331Z  INFO crud::update_data: Updating data for de
+    at crud/src/update_data.rs:41
+
+  2024-02-11T05:37:05.318880Z  INFO crud::update_data: Insert 458122
+    at crud/src/update_data.rs:43
+
+  2024-02-11T05:37:05.318907Z  INFO crud::update_data: Getting data for en
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:37:09.955422Z  INFO crud::update_data: Updating data for en
+    at crud/src/update_data.rs:41
+
+  2024-02-11T05:38:57.083890Z  INFO crud::update_data: Insert 458715
+    at crud/src/update_data.rs:43
+
+  2024-02-11T05:38:57.083936Z  INFO crud::update_data: Getting data for jp
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:39:00.621842Z  INFO crud::update_data: Updating data for jp
+    at crud/src/update_data.rs:41
+
+  2024-02-11T05:41:04.689865Z  INFO crud::update_data: Insert 458640
+    at crud/src/update_data.rs:43
+
+  2024-02-11T05:41:04.689895Z  INFO crud::update_data: Getting data for kr
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:41:08.017420Z  INFO crud::update_data: Updating data for kr
+    at crud/src/update_data.rs:41
+
+  2024-02-11T05:43:03.111013Z  INFO crud::update_data: Insert 458716
+    at crud/src/update_data.rs:43
+
+  2024-02-11T05:43:03.111044Z  INFO crud::update_data: Getting data for pt
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:43:08.191948Z  INFO crud::update_data: Updating data for pt
+    at crud/src/update_data.rs:41
+
+  2024-02-11T05:44:58.995075Z  INFO crud::update_data: Insert 458328
+    at crud/src/update_data.rs:43
+
+  2024-02-11T05:44:58.995104Z  INFO crud::update_data: Getting data for ru
+    at crud/src/update_data.rs:34
+
+  2024-02-11T05:45:05.784659Z  INFO crud::update_data: Updating data for ru
+    at crud/src/update_data.rs:41
+
