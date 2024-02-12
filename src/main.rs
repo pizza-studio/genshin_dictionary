@@ -32,17 +32,17 @@ async fn main() {
         let db = establish_conn(false).await.unwrap_or_log();
         info!("Updating dictionary data");
         update_dictionary(&db).await.unwrap_or_log();
+    } else {
+        let db = establish_conn(true).await.unwrap_or_log();
+
+        info!("Starting server...");
+
+        let app = app(db);
+
+        let addr = "0.0.0.0:3002";
+        let listener = TcpListener::bind(addr).await.unwrap();
+        info!("Listening on {}", addr);
+
+        axum::serve(listener, app).await.unwrap_or_log();
     }
-
-    let db = establish_conn(true).await.unwrap_or_log();
-
-    info!("Starting server...");
-
-    let app = app(db);
-
-    let addr = "0.0.0.0:3002";
-    let listener = TcpListener::bind(addr).await.unwrap();
-    info!("Listening on {}", addr);
-
-    axum::serve(listener, app).await.unwrap_or_log();
 }

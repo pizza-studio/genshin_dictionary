@@ -442,6 +442,7 @@ dependencies = [
  "serde_json",
  "sqlx",
  "strum",
+ "tempfile",
  "thiserror",
  "tokio",
  "tracing",

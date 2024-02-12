@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
+use sqlx::postgres::{PgHasArrayType, PgTypeInfo};
 use strum::EnumIter;
 
 #[derive(
@@ -47,6 +48,12 @@ pub enum Language {
     #[strum(serialize = "vi")]
     #[serde(rename = "vi")]
     Vi,
+}
+
+impl PgHasArrayType for Language {
+    fn array_type_info() -> PgTypeInfo {
+        PgTypeInfo::with_name("language[]")
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]

@@ -1,5 +1,7 @@
+alias dbp := dockerbuildandpush
+
 dockerbuild: sqlxprepare test
-    docker build -t daicanglong/genshin-dictionary-backend:latest . --platform linux/x86_64
+    docker build -t daicanglong/genshin-dictionary-backend:latest . --platform linux/arm64
 
 dockerpush:
     docker push daicanglong/genshin-dictionary-backend:latest

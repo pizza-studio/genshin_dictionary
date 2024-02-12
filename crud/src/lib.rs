@@ -21,16 +21,7 @@ use sqlx::ConnectOptions;
 pub use test_data::insert_test_data;
 
 pub async fn establish_conn(log_info: bool) -> anyhow::Result<PgPool> {
-    let db_url: String = if cfg!(debug_assertions) {
-        dotenvy::var("DATABASE_URL").context("DATABASE_URL must be set")?
-    } else {
-        let db_user = std::env::var("DATABASE_USER")
-            .expect("Unable to find DATABASE_USER in environment variables");
-        let db_password = std::env::var("DATABASE_PASSWORD")
-            .expect("Unable to find DATABASE_PASSWORD in environment variables");
-        const DB_NAME: &str = "genshin_dictionary";
-        format!("postgresql://{db_user}:{db_password}@db:5432/{DB_NAME}")
-    };
+    let db_url: String = dotenvy::var("DATABASE_URL").context("DATABASE_URL must be set")?;
 
     if !sqlx::Postgres::database_exists(&db_url).await? {
         sqlx::Postgres::create_database(&db_url).await?

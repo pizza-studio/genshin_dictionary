@@ -1,6 +1,5 @@
-use std::{collections::HashMap, sync::Arc};
+use std::{collections::HashMap, sync::Arc, time::Duration};
 
-use futures::future::try_join_all;
 use indicatif::{ProgressBar, ProgressStyle};
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -54,34 +53,43 @@ pub async fn insert_items(
 ) -> Result<usize, sqlx::Error> {
     let len = map.len();
     let bar = Arc::new(ProgressBar::new(len as u64));
-    let queries = map.into_iter().map(|(voc_id, voc_trans)| {
-        let style = ProgressStyle::with_template(
-            "[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7}\n{msg}",
-        )
-        .unwrap()
-        .progress_chars("##-");
+    let style = ProgressStyle::with_template(
+        "[{elapsed_precise}] {bar:40.cyan/blue} {pos:>7}/{len:7}\n{msg}",
+    )
+    .unwrap()
+    .progress_chars("##-");
+    bar.set_style(style);
+
+    let chunks = map.into_iter().chunks(800);
+    let queries = chunks
+    .into_iter()
+    .map(|chunk| {
         let bar = bar.clone();
-        bar.set_style(style);
+        let (voc_ids, trans): (Vec<_>, Vec<_>) = chunk.into_iter().unzip();
+        let len = voc_ids.len();
+        let langs = vec![lang ;len];
         async move {
-            bar.set_message(format!("{} {}: {}", lang, voc_id, voc_trans.chars().take(50).collect::<String>()));
             let result = sqlx::query!(
                 r#"
                 INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
-                VALUES ($1, $2, $3)
+                SELECT * FROM UNNEST($1::BIGINT[], $2::language[], $3::TEXT[])
                 "#,
-                voc_id,
-                lang as Language,
-                voc_trans
+                &voc_ids,
+                &langs as &[Language],
+                &trans
             )
             .execute(db)
             .await;
-            bar.inc(1);
+            bar.inc(len as u64);
+            tokio::time::sleep(Duration::from_secs_f32(0.1)).await;
             result
         }
     });
-    for chunk in queries.chunks(50).into_iter() {
-        try_join_all(chunk).await?;
+
+    for query in queries {
+        query.await?;
     }
+
     bar.finish();
     Ok(len)
 }
@@ -223,5 +231,29 @@ mod test {
         let map: HashMap<i64, String> = serde_json::from_slice(data).unwrap();
         let len = insert_items(Language::Chs, map, &db).await.unwrap();
         assert_eq!(29, len);
+    }
+
+    #[test]
+    fn t() {
+        use serde_json::{Deserializer, Value};
+
+        let data = r#"
+        {
+            "5532": "冰",
+            "9340": "与斯万对话",
+            "10152": "暂未开放",
+            "29946": "它从一开始就不可能失控好吗？",
+            "42036": "志华相信自己的恋爱运势即将来到，正在寻找一个人帮自己四处找找…",
+            "42756": "低空/高空坠地冲击伤害|{param9:P}/{param10:P}",
+            "60946": "他们把烟花都堆在一处，说是要去确认燃放地点，先离开了村子。",
+            "67618": "我听贝瑟说，照顾小孩子就像照顾花朵一样，要有很好的土壤，要有充足的阳光。要经常灌溉呵护，但也不能放任他们肆意乱长。"
+          }
+        "#;
+
+        let stream = Deserializer::from_str(data).into_iter::<Value>();
+
+        for value in stream {
+            println!("{}", value.unwrap());
+        }
     }
 }
