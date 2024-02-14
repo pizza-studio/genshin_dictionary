@@ -29,7 +29,7 @@ lazy_static! {
 }
 
 pub async fn update_dictionary(db: &PgPool) -> Result<(), CrudError> {
-    truncate_table(db).await?;
+    // truncate_table(db).await?;
     for (lang, url) in LANGUAGE_URL_MAPPING.iter() {
         info!("Getting data for {}", lang);
         let map = reqwest::get(url)
@@ -73,6 +73,8 @@ pub async fn insert_items(
                 r#"
                 INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
                 SELECT * FROM UNNEST($1::BIGINT[], $2::language[], $3::TEXT[])
+                ON CONFLICT ("vocabulary_id", "language") DO UPDATE
+                    SET "vocabulary_translation" = EXCLUDED."vocabulary_translation";
                 "#,
                 &voc_ids,
                 &langs as &[Language],
@@ -121,16 +123,16 @@ async fn delete_duplicated_items(db: &PgPool) -> Result<(), sqlx::Error> {
     Ok(())
 }
 
-async fn truncate_table(db: &PgPool) -> Result<(), sqlx::Error> {
-    sqlx::query!(
-        r#"
-        TRUNCATE TABLE dictionary_items
-        "#
-    )
-    .execute(db)
-    .await?;
-    Ok(())
-}
+// async fn truncate_table(db: &PgPool) -> Result<(), sqlx::Error> {
+//     sqlx::query!(
+//         r#"
+//         TRUNCATE TABLE dictionary_items
+//         "#
+//     )
+//     .execute(db)
+//     .await?;
+//     Ok(())
+// }
 
 #[cfg(test)]
 mod test {
@@ -154,32 +156,32 @@ mod test {
         }
     }
 
-    #[sqlx::test(migrator = "crate::MIGRATOR")]
-    async fn test_truncate_table(db: PgPool) {
-        sqlx::query!(
-            r#"
-            INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
-            VALUES ($1, $2, $3)
-            "#,
-            1,
-            Language::Chs as Language,
-            "Hello World"
-        )
-        .execute(&db)
-        .await
-        .unwrap();
-        truncate_table(&db).await.unwrap();
-        assert!(sqlx::query!(
-            r#"
-            SELECT "vocabulary_id", "language" AS "language!: Language", "vocabulary_translation"
-            FROM dictionary_items
-            "#
-        )
-        .fetch_optional(&db)
-        .await
-        .unwrap()
-        .is_none());
-    }
+    // #[sqlx::test(migrator = "crate::MIGRATOR")]
+    // async fn test_truncate_table(db: PgPool) {
+    //     sqlx::query!(
+    //         r#"
+    //         INSERT INTO "dictionary_items" ("vocabulary_id", "language", "vocabulary_translation")
+    //         VALUES ($1, $2, $3)
+    //         "#,
+    //         1,
+    //         Language::Chs as Language,
+    //         "Hello World"
+    //     )
+    //     .execute(&db)
+    //     .await
+    //     .unwrap();
+    //     truncate_table(&db).await.unwrap();
+    //     assert!(sqlx::query!(
+    //         r#"
+    //         SELECT "vocabulary_id", "language" AS "language!: Language", "vocabulary_translation"
+    //         FROM dictionary_items
+    //         "#
+    //     )
+    //     .fetch_optional(&db)
+    //     .await
+    //     .unwrap()
+    //     .is_none());
+    // }
 
     #[sqlx::test(migrator = "crate::MIGRATOR")]
     async fn test_delete_duplicate(db: PgPool) {
