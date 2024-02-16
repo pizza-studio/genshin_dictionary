@@ -65,7 +65,7 @@ pub struct DictionaryItem {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct NestedDictionaryItem {
-    pub vocabulary_id: i32,
+    pub vocabulary_id: i64,
     pub target: String,
     pub target_lang: Language,
     pub lan_dict: HashMap<Language, String>,
